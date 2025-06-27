@@ -75,4 +75,8 @@
     }
 </script>
 
+@push('scripts')
+    <script src="{{ asset('js/mealModal.js') }}"></script>
+@endpush
+
 @endsection

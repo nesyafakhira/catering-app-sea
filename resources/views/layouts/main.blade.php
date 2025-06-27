@@ -17,6 +17,7 @@
         'resources/css/pages/home.css',
         'resources/css/components/navbar.css',
         'resources/css/footer/navbar.css',
+        'resources/css/pages/testimonial.css',
         'resources/js/app.js',
     ])
 
@@ -70,7 +71,6 @@
             });
         });
     </script>
-
 
 </body>
 
