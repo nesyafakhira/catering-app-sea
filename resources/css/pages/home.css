@@ -10,7 +10,9 @@ body {
     background-color: #F3E9DC;
     font-family: 'Segoe UI', sans-serif;
     color: #5E3023;
+    padding-top: 6rem;
 }
+
 
 /* ===== Hero Section ===== */
 .hero-section {

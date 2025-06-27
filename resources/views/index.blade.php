@@ -95,7 +95,7 @@
         </div>
 
         {{-- Contact --}}
-        <div class="contact-section" style="flex: 1; min-width: 280px;">
+        <div class="contact-section" style="flex: 1; min-width: 280px;" id="contact">
             <h3 class="contact-title">Hubungi Kami</h3>
             <p class="contact-subtitle">Hubungi kami sekarang untuk konsultasi menu  <br> atau pertanyaan seputar layanan SEA Catering!</p>
             <div class="contact-card">

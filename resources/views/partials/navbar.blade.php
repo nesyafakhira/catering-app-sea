@@ -1,16 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="/">SEA Catering</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link {{ Request::is('/menu') ? 'active' : '' }}" href="#">Menu</a></li>
-        <li class="nav-item"><a class="nav-link {{ Request::is('/subscription') ? 'active' : '' }}" href="#">Subscription</a></li>
-        <li class="nav-item"><a class="nav-link {{ Request::is('/contact') ? 'active' : '' }}" href="#">Contact</a></li>
-      </ul>
+<nav class="navbar">
+    <div class="container">
+        <a href="#" class="logo">SEA Catering</a>
+        {{-- <a href="{{ route('home') }}" class="logo">SEA Catering</a> --}}
+        <button class="navbar-toggle" id="navbar-toggle">&#9776;</button>
+        <ul class="navbar-links" id="navbar-links">
+            <li><a href="#" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
+            <li><a href="#" class="{{ Request::is('menu') ? 'active' : '' }}">Menu</a></li>
+            <li><a href="#" class="{{ Request::is('subscribe') ? 'active' : '' }}">Subscription</a></li>
+            <li><a href="#contact" class="{{ Request::is('#contact') ? 'active' : '' }}">Contact Us</a></li>
+        </ul>
+        {{-- <ul class="navbar-links" id="navbar-links">
+            <li><a href="{{ route('home') }}" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
+            <li><a href="{{ route('menu') }}" class="{{ Request::is('menu') ? 'active' : '' }}">Menu</a></li>
+            <li><a href="{{ route('subscribe') }}" class="{{ Request::is('subscribe') ? 'active' : '' }}">Subscription</a></li>
+            <li><a href="#contact" class="{{ Request::is('#contact') ? 'active' : '' }}">Contact Us</a></li>
+        </ul> --}}
     </div>
-  </div>
 </nav>

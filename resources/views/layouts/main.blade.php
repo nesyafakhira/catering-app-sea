@@ -14,6 +14,7 @@
 
     @vite('resources/css/app.css')
     @vite('resources/css/pages/home.css')
+    @vite('resources/css/components/navbar.css')
 
 </head>
 
@@ -29,6 +30,43 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+            const toggleBtn = document.getElementById('navbar-toggle');
+            const navLinks = document.getElementById('navbar-links');
+
+            // Toggle nav on mobile
+            toggleBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('show');
+            });
+
+            // Scroll effect
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>
