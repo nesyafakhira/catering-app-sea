@@ -1,14 +1,6 @@
 @extends('layouts.main')
 
-@push('styles')
-    @vite([
-        'resources/css/pages/menu.css',
-    ])
-@endpush
-
-@push('scripts')
-    @vite('resources/js/mealModal.js')
-@endpush
+@vite(['resources/css/pages/menu.cssx'])
 
 @section('content')
 <section class="menu-section">
@@ -26,21 +18,21 @@
     @endphp
 
     <div class="menu-grid">
-    @foreach ($mealPlans as $plan)
-        <div class="menu-card"
-             data-name="{{ $plan['name'] }}"
-             data-price="{{ $plan['price'] }}"
-             data-description="{{ $plan['description'] }}"
-             data-image="{{ $plan['image'] }}">
-
-            <img src="{{ asset('images/meal/' . $plan['image']) }}" alt="{{ $plan['name'] }}" class="menu-image">
-            <h4>{{ $plan['name'] }}</h4>
-            <p>Rp{{ number_format($plan['price'], 0, ',', '.') }} / meal</p>
-            <button class="detail-btn" onclick="openModal(this)">See More Details</button>
-        </div>
-    @endforeach
-</div>
-
+        @foreach ($mealPlans as $plan)
+            <div class="menu-card">
+                <img src="{{ asset('images/meal/' . $plan['image']) }}" alt="{{ $plan['name'] }}" class="menu-image">
+                <h4>{{ $plan['name'] }}</h4>
+                <p>Rp{{ number_format($plan['price'], 0, ',', '.') }} / meal</p>
+                <button class="detail-btn" onclick="openModal(this)"
+                    data-name="{{ $plan['name'] }}"
+                    data-price="{{ $plan['price'] }}"
+                    data-description="{{ $plan['description'] }}"
+                    data-image="{{ asset('images/meal/' . $plan['image']) }}">
+                    See More Details
+                </button>
+            </div>
+        @endforeach
+    </div>
 </section>
 
 {{-- Modal --}}
@@ -63,8 +55,6 @@
     </div>
 </div>
 
-@endsection
-
 <script>
     function openModal(button) {
         const name = button.parentElement.dataset.name;
@@ -84,3 +74,5 @@
         document.getElementById("mealModal").style.display = "none";
     }
 </script>
+
+@endsection
