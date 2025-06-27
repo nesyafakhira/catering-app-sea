@@ -15,6 +15,7 @@
     @vite('resources/css/app.css')
     @vite('resources/css/pages/home.css')
     @vite('resources/css/components/navbar.css')
+    @vite('resources/css/footer/navbar.css')
 
 </head>
 
