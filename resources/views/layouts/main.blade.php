@@ -12,10 +12,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    @vite('resources/css/app.css')
-    @vite('resources/css/pages/home.css')
-    @vite('resources/css/components/navbar.css')
-    @vite('resources/css/footer/navbar.css')
+    @vite([
+        'resources/css/app.css',
+        'resources/css/pages/home.css',
+        'resources/css/components/navbar.css',
+        'resources/css/footer/navbar.css',
+        'resources/js/app.js',
+    ])
+
 
 </head>
 
