@@ -18,6 +18,7 @@
         'resources/css/components/navbar.css',
         'resources/css/footer/navbar.css',
         'resources/css/pages/testimonial.css',
+        'resources/css/pages/subscription.css',
         'resources/js/app.js',
     ])
 
