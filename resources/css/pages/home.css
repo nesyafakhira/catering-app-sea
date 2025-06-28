@@ -331,71 +331,58 @@ section:not(:last-of-type) {
 /* testimonial section */
 .testimonials-section {
             width: 100%;
-            max-width: 1200px;
+            max-width: 71rem;
             text-align: center;
-            padding: 40px 0;
         }
 
-        /* [PERMINTAAN] Judul dan Subjudul */
         .testimonials-section h2 {
             font-size: 2.5rem;
-            color: #1a237e; /* Warna biru tua */
+            color: #5E3023;
             margin-bottom: 8px;
         }
 
-        .testimonials-section .subtitle {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .testimonial-container {
-            width: 100%;
+        .slider-master-card {
+            background-color: #f9f3ed;
+            border-radius: 1rem;
+            padding: 2.5rem 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
             position: relative;
+            overflow: hidden;
+            margin-top: 2rem;
         }
 
         .testimonial-viewport {
             width: 100%;
-            /* Ini yang membuat card di samping terlihat setengah */
-            overflow: hidden;
             position: relative;
         }
 
         #testimonialTrack {
-            display: flex; /* Membuat semua slide berjajar */
-            /* Transisi dipindahkan ke JS untuk kontrol lebih baik saat looping */
+            display: flex;
+            align-items: center;
         }
 
         .testimonial-slide {
-             /* Setiap slide lebarnya 40% dari viewport, ini kunci agar tidak semua muat */
             flex: 0 0 40%;
-            max-width: 400px; /* Lebar maksimal per kartu */
+            max-width: 400px;
             box-sizing: border-box;
             padding: 25px;
             text-align: center;
-            background-color: #ffffff;
-            border-radius: 15px;
-            margin: 0 15px; /* Jarak antar slide */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            /* Transisi untuk efek scale dan opacity */
+            border-radius: 20px;
+            margin: 0 15px;
             transition: transform 0.5s ease, opacity 0.5s ease;
             user-select: none;
-
-            /* [PERMINTAAN] Card samping tidak menonjol */
-            transform: scale(0.8);
-            opacity: 0.5;
+            background-color: transparent;
+            transform: scale(0.85);
+            opacity: 0.6;
             z-index: 1;
         }
 
-        /* [PERMINTAAN] Card tengah menonjol sendiri */
         .testimonial-slide.active {
+            background-color: #ffffff;
+            box-shadow: 0 10px 35px rgba(26, 35, 126, 0.1);
             transform: scale(1);
             opacity: 1;
-            box-shadow: 0 10px 35px rgba(26, 35, 126, 0.15);
-            z-index: 2; /* Pastikan card aktif di atas yang lain */
+            z-index: 2;
         }
 
         .testimonial-slide p {
@@ -407,7 +394,7 @@ section:not(:last-of-type) {
         .testimonial-slide .name {
             font-weight: bold;
             margin-top: 15px;
-            color: #1a237e;
+            color: #5E3023;
         }
 
         .testimonial-slide .stars {
@@ -416,28 +403,110 @@ section:not(:last-of-type) {
             margin-top: 5px;
         }
 
+        /* [DIUBAH] Tombol sekarang berada di dalam master card */
         .slider-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             background-color: white;
             border-radius: 50%;
-            border: 1px solid #eee;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.07);
             cursor: pointer;
-            font-size: 26px;
+            font-size: 20px;
             color: #333;
             z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* [DIUBAH] Posisi tombol di ujung card */
         #prevBtn {
-            left: calc(50% - 120px); /* Posisi tombol disesuaikan */
-            transform: translate(-100%, -50%);
+            left: 30px;
         }
 
         #nextBtn {
-            right: calc(50% - 120px);
-            transform: translate(100%, -50%);
+            right: 30px;
         }
+
+        .testimonial-form-wrapper {
+    background-color: #f9f3ed;
+    border-radius: 1rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+    max-width: 71rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: left;
+}
+
+.form-title {
+    text-align: center;
+    color: #5E3023;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-group-row .form-group {
+    flex: 1;
+    min-width: 220px;
+}
+
+.testimonial-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #895737;
+}
+
+.testimonial-form input,
+.testimonial-form textarea,
+.testimonial-form select {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid #e0d2c0;
+    border-radius: 8px;
+    background-color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #5E3023;
+    box-sizing: border-box;
+}
+
+.testimonial-form input:focus,
+.testimonial-form textarea:focus,
+.testimonial-form select:focus {
+    border-color: #C08552;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(192, 133, 82, 0.15);
+}
+
+.testimonial-form button.cta-btn {
+    background-color: #5E3023;
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.testimonial-form button.cta-btn:hover {
+    background-color: #402015;
+}

@@ -106,19 +106,53 @@
         </div>
     </section>
 
-    <div class="testimonials-section">
+    <section class="testimonials-section">
+        <div class="section-header">
+            <h2 class="section-title">Apa Kata Mereka?</h2>
+            <p class="section-subtitle">Kami bangga telah melayani ribuan pelanggan yang puas. Lihat beberapa cerita mereka di bawah ini.</p>
+        </div>
 
-        <h2>Apa Kata Mereka?</h2>
-        <p class="subtitle">Kami bangga telah melayani ribuan pelanggan yang puas. Lihat beberapa cerita mereka di bawah ini.</p>
-
-        <div class="testimonial-container">
+        <div class="slider-master-card">
+            <button id="prevBtn" class="slider-nav">‹</button>
             <div class="testimonial-viewport">
                 <div id="testimonialTrack"></div>
             </div>
-            <button id="prevBtn" class="slider-nav">‹</button>
             <button id="nextBtn" class="slider-nav">›</button>
         </div>
-    </div>
+
+        <div class="testimonial-form-wrapper">
+            <h3 class="form-title">Tinggalkan Ulasanmu</h3>
+            <form id="testimonialForm" class="testimonial-form">
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="name">Nama</label>
+                        <input type="text" id="name" name="name" placeholder="Nama kamu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <select id="rating" name="rating" required>
+                            <option value="">Pilih</option>
+                            <option value="5">★★★★★ (5)</option>
+                            <option value="4">★★★★☆ (4)</option>
+                            <option value="3">★★★☆☆ (3)</option>
+                            <option value="2">★★☆☆☆ (2)</option>
+                            <option value="1">★☆☆☆☆ (1)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="review">Pesan</label>
+                    <textarea id="review" name="review" placeholder="Ceritakan pengalamanmu..." rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="cta-btn">Kirim</button>
+            </form>
+        </div>
+
+
+    </section>
+
 
 @endsection
 
@@ -246,4 +280,12 @@
         window.addEventListener('resize', () => updateSliderPosition(false));
     });
     </script>
+
+    <script>
+    document.getElementById('testimonialForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Terima kasih atas ulasanmu! (Form ini belum tersambung ke backend)');
+    });
+    </script>
+
 
