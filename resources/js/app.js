@@ -8,4 +8,3 @@ Alpine.start();
 
 import './mealModal';
 import './subscription';
-
