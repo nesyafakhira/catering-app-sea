@@ -73,6 +73,13 @@
         });
     </script>
 
+    <script>
+        form.addEventListener('submit', e => {
+            const price = calculateTotalAndReturn();
+            document.getElementById('total_price_input').value = price;
+        });
+    </script>
+
 </body>
 
 </html>

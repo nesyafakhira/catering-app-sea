@@ -115,14 +115,26 @@
         <div class="slider-master-card">
             <button id="prevBtn" class="slider-nav">‹</button>
             <div class="testimonial-viewport">
-                <div id="testimonialTrack"></div>
+                <div id="testimonialTrack">
+                    @foreach ($testimonials as $testimonial)
+                        <div class="testimonial-slide">
+                            <p>"{{ $testimonial->review }}"</p>
+                            <div class="name">{{ $testimonial->name }}</div>
+                            <div class="stars">
+                                {!! str_repeat('★', $testimonial->rating) !!}
+                                {!! str_repeat('☆', 5 - $testimonial->rating) !!}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <button id="nextBtn" class="slider-nav">›</button>
         </div>
 
         <div class="testimonial-form-wrapper">
             <h3 class="form-title">Tinggalkan Ulasanmu</h3>
-            <form id="testimonialForm" class="testimonial-form">
+            <form id="testimonialForm" class="testimonial-form" action="{{ route('testimonial.store') }}" method="POST">
+                @csrf
                 <div class="form-group-row">
                     <div class="form-group">
                         <label for="name">Nama</label>
@@ -156,130 +168,92 @@
 
 @endsection
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const testimonials = [
-            { name: 'Nabila', review: 'Makanannya enak dan pas banget buat diet!', rating: 5 },
-            { name: 'Andi', review: 'Pengiriman selalu on time, puas banget!', rating: 4 },
-            { name: 'Sari', review: 'Porsinya pas, dan variatif tiap minggu!', rating: 5 },
-            { name: 'Dewi', review: 'Cocok buat keluarga juga!', rating: 4 },
-            { name: 'Rian', review: 'Affordable dan sehat, worth it!', rating: 5 }
-        ];
-
-        const track = document.getElementById('testimonialTrack');
-        const viewport = document.querySelector('.testimonial-viewport');
-        const nextBtn = document.getElementById('nextBtn');
-        const prevBtn = document.getElementById('prevBtn');
-
-        let currentIndex = 0;
-        let slideInterval;
-        let isTransitioning = false;
-
-        // Logika kloning data untuk infinite loop tetap sama
-        const slidesData = [...testimonials, ...testimonials, ...testimonials];
-
-        function renderSlides() {
-            track.innerHTML = '';
-            slidesData.forEach(t => {
-                const slide = document.createElement('div');
-                slide.classList.add('testimonial-slide');
-                slide.innerHTML = `
-                    <p>"${t.review}"</p>
-                    <div class="name">${t.name}</div>
-                    <div class="stars">${'★'.repeat(t.rating)}${'☆'.repeat(5 - t.rating)}</div>
-                `;
-                track.appendChild(slide);
-            });
-        }
-
-        function updateSliderPosition(animate = true) {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const track = document.getElementById('testimonialTrack');
             const slides = track.querySelectorAll('.testimonial-slide');
+            const viewport = document.querySelector('.testimonial-viewport');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+
             if (slides.length === 0) return;
 
-            const slideWidth = slides[0].offsetWidth;
-            const margin = parseInt(window.getComputedStyle(slides[0]).marginRight) * 2;
-            const totalSlideWidth = slideWidth + margin;
-            const viewportCenter = viewport.offsetWidth / 2;
-            const slideCenter = totalSlideWidth / 2;
+            let currentIndex = slides.length; // Mulai dari kloning tengah
+            let slideInterval;
+            let isTransitioning = false;
 
-            // Kalkulasi offset agar slide aktif selalu di tengah viewport
-            const offset = viewportCenter - slideCenter - (currentIndex * totalSlideWidth);
-
-            track.style.transition = animate ? 'transform 0.6s ease' : 'none';
-            track.style.transform = `translateX(${offset}px)`;
-
-            updateActiveSlide();
-        }
-
-        function updateActiveSlide() {
-            const allSlides = track.querySelectorAll('.testimonial-slide');
-            allSlides.forEach((slide, index) => {
-                slide.classList.remove('active');
-                if (index === currentIndex) {
-                    slide.classList.add('active');
-                }
+            // Clone 2x untuk efek loop
+            const originalSlides = [...slides];
+            originalSlides.forEach(s => {
+                const clone1 = s.cloneNode(true);
+                const clone2 = s.cloneNode(true);
+                track.appendChild(clone1);
+                track.insertBefore(clone2, track.firstChild);
             });
-        }
 
-        // --- LOGIKA UTAMA UNTUK LOOPING ---
-        function moveToNext() {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            currentIndex++;
-            updateSliderPosition();
+            function updateSliderPosition(animate = true) {
+                const allSlides = track.querySelectorAll('.testimonial-slide');
+                const slideWidth = allSlides[0].offsetWidth;
+                const margin = parseInt(window.getComputedStyle(allSlides[0]).marginRight) * 2;
+                const totalSlideWidth = slideWidth + margin;
 
-            // Cek jika sudah mencapai batas kloningan di akhir
-            if (currentIndex >= testimonials.length * 2) {
-                // Setelah animasi selesai, lompat kembali ke set pertama tanpa animasi
-                setTimeout(() => {
-                    currentIndex = testimonials.length;
-                    updateSliderPosition(false);
-                }, 600); // Samakan dengan durasi transisi CSS
+                const offset = (viewport.offsetWidth / 2) - (totalSlideWidth / 2) - (currentIndex * totalSlideWidth);
+                track.style.transition = animate ? 'transform 0.6s ease' : 'none';
+                track.style.transform = `translateX(${offset}px)`;
+
+                allSlides.forEach((slide, idx) => {
+                    slide.classList.toggle('active', idx === currentIndex);
+                });
             }
-        }
 
-        function moveToPrev() {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            currentIndex--;
-            updateSliderPosition();
+            function moveToNext() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                currentIndex++;
+                updateSliderPosition();
 
-            // Cek jika sudah mencapai batas kloningan di awal
-            if (currentIndex < testimonials.length) {
-                setTimeout(() => {
-                    currentIndex = testimonials.length * 2 - 1;
-                    updateSliderPosition(false);
-                }, 600);
+                const allSlides = track.querySelectorAll('.testimonial-slide');
+                if (currentIndex >= allSlides.length - originalSlides.length) {
+                    setTimeout(() => {
+                        currentIndex = originalSlides.length;
+                        updateSliderPosition(false);
+                    }, 600);
+                }
             }
-        }
 
-        // Listener untuk reset flag `isTransitioning` setelah animasi selesai
-        track.addEventListener('transitionend', () => {
-            isTransitioning = false;
+            function moveToPrev() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                currentIndex--;
+                updateSliderPosition();
+
+                if (currentIndex < originalSlides.length) {
+                    setTimeout(() => {
+                        currentIndex = allSlides.length - originalSlides.length - 1;
+                        updateSliderPosition(false);
+                    }, 600);
+                }
+            }
+
+            track.addEventListener('transitionend', () => isTransitioning = false);
+            nextBtn.addEventListener('click', moveToNext);
+            prevBtn.addEventListener('click', moveToPrev);
+
+            function startAutoSlide() {
+                slideInterval = setInterval(moveToNext, 4000);
+            }
+
+            function stopAutoSlide() {
+                clearInterval(slideInterval);
+            }
+
+            // Inisialisasi posisi tengah
+            updateSliderPosition(false);
+            startAutoSlide();
+            window.addEventListener('resize', () => updateSliderPosition(false));
         });
-
-        function startAutoSlide() {
-            slideInterval = setInterval(moveToNext, 4000);
-        }
-
-        function stopAutoSlide() {
-            clearInterval(slideInterval);
-        }
-
-        nextBtn.addEventListener('click', moveToNext);
-        prevBtn.addEventListener('click', moveToPrev);
-
-        // Inisialisasi
-        renderSlides();
-        // Mulai dari set data yang tengah agar bisa scroll ke kiri dan kanan
-        currentIndex = testimonials.length;
-        updateSliderPosition(false);
-        startAutoSlide();
-
-        // Recalculate position on window resize
-        window.addEventListener('resize', () => updateSliderPosition(false));
-    });
     </script>
+
 
     <script>
     document.getElementById('testimonialForm').addEventListener('submit', function(e) {

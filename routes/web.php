@@ -1,10 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\SubscriptionController;
 
 Route::get('/', function () {
-    return view('index');
+    $testimonials = Testimonial::latest()->take(6)->get();
+    return view('index', compact('testimonials'));
 });
 
 Route::get('/menu', function () {
@@ -16,10 +20,11 @@ Route::get('/menu', function () {
     return view('menu', compact('mealPlans'));
 });
 
-Route::get('/subscription', function () {
-    return view('subscription');
-});
+Route::get('/subscribe', [SubscriptionController::class, 'create'])->name('subscribe.form');
+Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe.store');
 
+
+Route::post('/testimonial', [TestimonialController::class, 'store'])->name('testimonial.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

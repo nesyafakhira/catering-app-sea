@@ -8,8 +8,9 @@
   </div>
 
   <div class="subscription-card">
-    <form id="subscription-form" class="subscription-form" novalidate>
-      <div class="form-group">
+    <form id="subscription-form" action="{{ route('subscribe.store') }}" method="POST" class="subscription-form" novalidate>
+        @csrf
+        <div class="form-group">
         <label for="name">Nama Lengkap</label>
         <input type="text" id="name" required>
       </div>
