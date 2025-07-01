@@ -106,7 +106,7 @@
         </div>
     </section>
 
-    <section class="testimonials-section">
+    <section class="testimonials-section" id="section-testimonials">
         <div class="section-header">
             <h2 class="section-title">Apa Kata Mereka?</h2>
             <p class="section-subtitle">Kami bangga telah melayani ribuan pelanggan yang puas. Lihat beberapa cerita mereka di bawah ini.</p>
