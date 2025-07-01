@@ -17,15 +17,10 @@
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" required autocomplete="new-password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}">
+            <small class="text-xs text-gray-500">Minimal 8 karakter, huruf besar, kecil, angka, dan simbol</small>
         </div>
 
         <!-- Confirm Password -->

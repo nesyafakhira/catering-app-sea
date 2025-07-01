@@ -8,18 +8,78 @@
     <title> @yield('title', 'SEA Catering') </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    @vite([
+        'resources/css/app.css',
+        'resources/css/pages/home.css',
+        'resources/css/components/navbar.css',
+        'resources/css/footer/navbar.css',
+        'resources/css/pages/testimonial.css',
+        'resources/css/pages/subscription.css',
+        'resources/js/app.js',
+    ])
+
 
 </head>
 
 <body>
     @include('partials.navbar')
 
-    <div class="container mt-4">
+    <div class="container mt-5">
         @yield('content')
     </div>
+
+    @include('partials.footer')
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+            const toggleBtn = document.getElementById('navbar-toggle');
+            const navLinks = document.getElementById('navbar-links');
+
+            // Toggle nav on mobile
+            toggleBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('show');
+            });
+
+            // Scroll effect
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        form.addEventListener('submit', e => {
+            const price = calculateTotalAndReturn();
+            document.getElementById('total_price_input').value = price;
+        });
+    </script>
+
 </body>
 
 </html>

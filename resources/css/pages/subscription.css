@@ -1,0 +1,118 @@
+.subscription-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.subscription-card {
+  background-color: #ffffff;
+  border: 1px solid #EFEAE3;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.subscription-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.subscription-form label {
+  display: block;
+  font-weight: 600;
+  color: #5E3023;
+  margin-bottom: 0.5rem;
+}
+
+.subscription-form input[type="text"],
+.subscription-form input[type="tel"],
+.subscription-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ecd9c6;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-options {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Grid untuk delivery 7 kolom di desktop */
+.grid-7 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .grid-7 {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+
+/* Uniform selection (radio dan checkbox pakai tampilan tombol) */
+.form-options input[type="radio"],
+.form-options input[type="checkbox"] {
+  display: none;
+}
+
+.form-options label {
+  display: block;
+  background-color: #f5eee5;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e0c9b2;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+}
+
+.form-options input:checked + label {
+  background-color: #EAD6BE;
+  border-color: #5E3023;
+  font-weight: bold;
+  color: #5E3023;
+}
+
+.form-summary {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ecd9c6;
+}
+
+.summary-label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #5E3023;
+}
+
+.summary-value {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #C08552;
+  margin: 0.5rem 0;
+}
+
+.summary-note {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.error-message {
+    color: #c0392b;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}

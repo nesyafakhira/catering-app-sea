@@ -1,3 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './pages/home.css';
+@import './pages/menu.css';
+@import './components/navbar.css';
+@import './components/footer.css';
